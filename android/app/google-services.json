@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "135420643458",
+    "project_id": "maxamx-dart-app-filme",
+    "storage_bucket": "maxamx-dart-app-filme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135420643458:android:acd379fcb8b3c9be4a0c9b",
+        "android_client_info": {
+          "package_name": "maxamx.app_filmes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135420643458-krcl4s7k6popcm1cmp574uas2l3pj7gj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "maxamx.app_filmes",
+            "certificate_hash": "31c753feac58e5411128cf58d93a97c4917975aa"
+          }
+        },
+        {
+          "client_id": "135420643458-gs7i7rnpcr4qp61g4lkf7vbe6eg6fgd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1Bu1F5G8-6PsB_vmuWoY8tN-cqUu-my4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135420643458-gs7i7rnpcr4qp61g4lkf7vbe6eg6fgd7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
