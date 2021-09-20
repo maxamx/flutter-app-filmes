@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -8,16 +9,14 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            color: Colors.red,
-            width: 200,
-            height: 200,
+          Image.asset(
+            'assets/images/background.png',
+            width: Get.width,
+            height: Get.height,
+            fit: BoxFit.cover,
           ),
-          Container(
-            color: Colors.blue,
-            width: 100,
-            height: 100,
-          )
+          Container(color: Colors.black45),
+          Image.asset('assets/images/logo.png')
         ],
       ),
     );
