@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
+import 'login_controller.dart';
+
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final controller = Get.find<LoginController>();
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class LoginPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80)),
                     text: "Sign up with Google",
-                    onPressed: () {},
+                    onPressed: () => controller.login(),
                   ),
                 ),
               ])),
