@@ -23,8 +23,8 @@ class LoginPage extends StatelessWidget {
               child: Column(children: [
                 Image.asset('assets/images/logo.png'),
                 SizedBox(
-                  width: 327,
-                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   child: SignInButton(
                     Buttons.Google,
                     text: "Sign up with Google",
