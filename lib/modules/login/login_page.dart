@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        alignment: Alignment.topCenter,
         children: [
           Image.asset(
             'assets/images/background.png',
@@ -16,7 +18,20 @@ class LoginPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Container(color: Colors.black45),
-          Image.asset('assets/images/logo.png')
+          Padding(
+              padding: const EdgeInsets.only(top: 80.0),
+              child: Column(children: [
+                Image.asset('assets/images/logo.png'),
+                SizedBox(
+                  width: 327,
+                  height: 42,
+                  child: SignInButton(
+                    Buttons.Google,
+                    text: "Sign up with Google",
+                    onPressed: () {},
+                  ),
+                ),
+              ])),
         ],
       ),
     );
