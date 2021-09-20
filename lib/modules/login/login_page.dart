@@ -23,10 +23,12 @@ class LoginPage extends StatelessWidget {
               child: Column(children: [
                 Image.asset('assets/images/logo.png'),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  width: Get.width * .9,
+                  height: 42,
                   child: SignInButton(
                     Buttons.Google,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(80)),
                     text: "Sign up with Google",
                     onPressed: () {},
                   ),
