@@ -6,10 +6,7 @@ class FilmePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('filmes'),
-      ),
-      body: Container(),
+      body: Text('Filmes'),
     );
   }
 }

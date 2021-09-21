@@ -1,4 +1,5 @@
 import 'package:app_filmes/applications/modules/module.dart';
+import 'package:app_filmes/modules/home/home_binginds.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
 import 'home_page.dart';
@@ -9,6 +10,7 @@ class HomeModule extends Module {
     GetPage(
       name: '/home',
       page: () => HomePage(),
+      binding: HomeBinginds(),
     )
   ];
 }

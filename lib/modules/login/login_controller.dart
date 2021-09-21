@@ -1,3 +1,4 @@
+import 'package:app_filmes/applications/auth/auth_service.dart';
 import 'package:app_filmes/applications/ui/loader/loader_mixin.dart';
 import 'package:app_filmes/applications/ui/messages/messages_mixin.dart';
 import 'package:app_filmes/services/login/login_service.dart';
@@ -28,6 +29,7 @@ class LoginController extends GetxController with LoaderMixin, MessagesMixin {
           title: 'Sucesso', message: 'Login realizado com sucesso'));
       // await Future.delayed(Duration(seconds: 2));
       await 1.seconds.delay();
+      Get.offNamed('/home');
     } catch (e, s) {
       print(e);
       print(s);

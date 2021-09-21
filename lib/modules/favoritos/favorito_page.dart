@@ -7,9 +7,10 @@ class FavoritoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('favoritos'),
+        automaticallyImplyLeading: false,
+        title: Text('Favoritos'),
       ),
-      body: Container(),
+      body: Text('Favorito'),
     );
   }
 }
