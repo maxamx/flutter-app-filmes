@@ -4,9 +4,8 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 import 'login_controller.dart';
 
-class LoginPage extends StatelessWidget {
-  final controller = Get.find<LoginController>();
-  LoginPage({Key? key}) : super(key: key);
+class LoginPage extends GetView<LoginController> {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
