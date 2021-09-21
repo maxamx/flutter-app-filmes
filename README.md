@@ -3,8 +3,13 @@
 A new Flutter project.
 
 ## Getting Started
+flutter create --platforms android --org maxamx --project-name app_filmes ./app_filmes
 
 This project is a starting point for a Flutter application.
+
+## Firebase
+./gradlew signingReport
+
 
 A few resources to get you started if this is your first Flutter project:
 
