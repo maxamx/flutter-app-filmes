@@ -1,3 +1,4 @@
+import 'package:app_filmes/modules/filmes/widgets/filmes_grupo.dart';
 import 'package:app_filmes/modules/filmes/widgets/filmes_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,9 @@ class FilmePage extends StatelessWidget {
           children: [
             FilmesHeader(),
             FilmesFiltros(),
+            FilmesGrupo(
+              titulo: 'Mais Populares',
+            ),
           ],
         ));
   }
