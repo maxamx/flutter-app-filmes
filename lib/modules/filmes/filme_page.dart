@@ -1,3 +1,4 @@
+import 'package:app_filmes/modules/filmes/widgets/filter_tag.dart';
 import 'package:flutter/material.dart';
 
 class FilmePage extends StatelessWidget {
@@ -5,8 +6,15 @@ class FilmePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text('Filmes'),
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              FilterTag(),
+            ],
+          )),
     );
   }
 }
