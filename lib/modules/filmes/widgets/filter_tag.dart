@@ -16,8 +16,11 @@ class FilterTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return InkWell(
+    onTap: onPressed,
+     child:Container(
         margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(5),
         constraints: BoxConstraints(minWidth: 100, minHeight: 30),
         decoration: BoxDecoration(
             color: _selected ? context.themeRed : Colors.black,
@@ -26,5 +29,6 @@ class FilterTag extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(generoModelo.nome,
                 style: TextStyle(color: Colors.white, fontSize: 14))));
+     );   
   }
 }
