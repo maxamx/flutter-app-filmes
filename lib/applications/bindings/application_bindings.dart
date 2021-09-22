@@ -14,7 +14,7 @@ class ApplicationBindings implements Bindings {
     Get.lazyPut<LoginService>(
         () => LoginServiceImpl(loginRepository: Get.find()),
         fenix: true);
-    Get.lazyPut(() => RestClient());
+    Get.lazyPut(() => RestClient(), fenix: true);
     Get.put(AuthService(), permanent: true).init();
   }
 }

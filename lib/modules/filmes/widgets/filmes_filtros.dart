@@ -17,7 +17,11 @@ class FilmesFiltros extends GetView<FilmesController> {
           return Row(
             children: controller.generos
                 .map(
-                  (g) => FilterTag(),
+                  (g) => FilterTag(
+                    generoModelo: g,
+                    onPressed: () {},
+                    selected: false,
+                  ),
                 )
                 .toList(),
           );
