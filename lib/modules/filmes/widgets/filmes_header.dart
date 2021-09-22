@@ -9,7 +9,7 @@ class FilmesHeader extends StatelessWidget {
     return SizedBox(
         width: Get.width,
         height: 196,
-        child: Stack(children: [
+        child: Stack(alignment: Alignment.bottomCenter, children: [
           SizedBox(
             width: Get.width,
             child: Image.asset(
