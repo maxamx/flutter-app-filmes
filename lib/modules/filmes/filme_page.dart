@@ -19,6 +19,9 @@ class FilmePage extends StatelessWidget {
             FilmesGrupo(
               titulo: 'Mais Populares',
             ),
+            FilmesGrupo(
+              titulo: 'Top Filmes',
+            ),
           ],
         ));
   }

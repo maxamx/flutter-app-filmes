@@ -19,7 +19,16 @@ class FilmesGrupo extends StatelessWidget {
           _titulo,
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        FilmesCard(),
+        SizedBox(
+          height: 280,
+          child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return FilmesCard();
+              }),
+        ),
       ],
     );
   }
