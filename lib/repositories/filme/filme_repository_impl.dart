@@ -11,14 +11,9 @@ class FilmeRepositoryImpl implements FilmeRepository {
       : _restClient = restClient;
 
   @override
-  Future<List<FilmeModel>> getFilmesPopulares() =>
-      _getFilmes('/movies/popular');
-  @override
-  Future<List<FilmeModel>> getFilmesTops() => _getFilmes('/movie/top_rated');
-
-  Future<List<FilmeModel>> _getFilmes(String url) async {
-    final resultado = await _restClient.get(
-      url,
+  Future<List<FilmeModel>> getFilmesPopulares() async {
+    final resultado = await _restClient.get<List<FilmeModel>>(
+      '/movie/popular',
       query: {
         'api_key': RemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
@@ -36,8 +31,36 @@ class FilmeRepositoryImpl implements FilmeRepository {
       },
     );
     if (resultado.hasError) {
-      print('Erro ao buscar filmes [$url] [${resultado.statusText}]');
-      throw Exception('Erro ao buscar filmes  [$url]');
+      print('Erro ao buscar filmes populares [${resultado.statusText}]');
+      throw Exception('Erro ao buscar filmes populares');
+    }
+
+    return resultado.body ?? <FilmeModel>[];
+  }
+
+  @override
+  Future<List<FilmeModel>> getFilmesTops() async {
+    final resultado = await _restClient.get<List<FilmeModel>>(
+      '/movie/top_rated',
+      query: {
+        'api_key': RemoteConfig.instance.getString('api_token'),
+        'language': 'pt-br',
+        'page': 1
+      },
+      decoder: (data) {
+        final resultado = data['results'];
+        if (resultado != null) {
+          return resultado
+              .map<FilmeModel>((f) => FilmeModel.fromMap(f))
+              .toList();
+        }
+
+        return <FilmeModel>[];
+      },
+    );
+    if (resultado.hasError) {
+      print('Erro ao buscar filmes tops [${resultado.statusText}]');
+      throw Exception('Erro ao buscar filmes tops');
     }
 
     return resultado.body ?? <FilmeModel>[];

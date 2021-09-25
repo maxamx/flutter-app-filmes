@@ -15,14 +15,20 @@ class ApplicationBindings implements Bindings {
   void dependencies() {
     //fenix permite que a instancia do fique ativa
     Get.lazyPut<LoginRepository>(() => LoginRepositoryImpl(), fenix: true);
+
     Get.lazyPut<LoginService>(
         () => LoginServiceImpl(loginRepository: Get.find()),
         fenix: true);
     Get.lazyPut(() => RestClient(), fenix: true);
+
     Get.put(AuthService(), permanent: true).init();
+
     Get.lazyPut<FilmeRepository>(
-        () => FilmeRepositoryImpl(restClient: Get.find()));
+        () => FilmeRepositoryImpl(restClient: Get.find()),
+        fenix: true);
+
     Get.lazyPut<FilmeService>(
-        () => FilmeServiceImpl(filmeRepository: Get.find()));
+        () => FilmeServiceImpl(filmeRepository: Get.find()),
+        fenix: true);
   }
 }

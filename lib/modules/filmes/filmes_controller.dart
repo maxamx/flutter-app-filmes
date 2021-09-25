@@ -26,6 +26,7 @@ class FilmesController extends GetxController with MessagesMixin {
   List<GeneroModelo> get generos => _generos.toList();
 
   List<FilmeModel> get filmesPopulares => _filmesPopulares.toList();
+
   List<FilmeModel> get filmesTops => _filmesTops.toList();
 
   @override
@@ -39,12 +40,15 @@ class FilmesController extends GetxController with MessagesMixin {
     super.onReady();
     try {
       final generosData = await _generoService.getGenero();
+
       _generos.assignAll(generosData);
 
-      final filmesPopularesData = await _filmeService.getFilmesPopulares();
+      //final filmesPopularesData = await _filmeService.getFilmesPopulares();
+
       final filmesTopsData = await _filmeService.getFilmesTops();
 
-      _filmesPopulares.assignAll(filmesPopularesData);
+      //_filmesPopulares.assignAll(filmesPopularesData);
+
       _filmesTops.assignAll(filmesTopsData);
     } catch (e, s) {
       print(e);
