@@ -43,11 +43,11 @@ class FilmesController extends GetxController with MessagesMixin {
 
       _generos.assignAll(generosData);
 
-      //final filmesPopularesData = await _filmeService.getFilmesPopulares();
+      final filmesPopularesData = await _filmeService.getFilmesPopulares();
 
       final filmesTopsData = await _filmeService.getFilmesTops();
 
-      //_filmesPopulares.assignAll(filmesPopularesData);
+      _filmesPopulares.assignAll(filmesPopularesData);
 
       _filmesTops.assignAll(filmesTopsData);
     } catch (e, s) {

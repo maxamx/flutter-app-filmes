@@ -19,22 +19,22 @@ class FilmeModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'titulo': titulo,
-      'dataLancamento': dataLancamento,
-      'caminhoImagemPoster': caminhoImagemPoster,
-      'generos': generos,
-      'favorito': favorito,
+      'title': titulo,
+      'release_date': dataLancamento,
+      'poster_path': caminhoImagemPoster,
+      'genre_ids': generos,
+      'favorite': favorito,
     };
   }
 
   factory FilmeModel.fromMap(Map<String, dynamic> map) {
     return FilmeModel(
-      id: map['id'],
-      titulo: map['title'],
-      dataLancamento: map['release_date'],
+      id: map['id'] ?? 0,
+      titulo: map['title'] ?? '',
+      dataLancamento: map['release_date'] ?? '',
       caminhoImagemPoster:
           'https://image.tmdb.org/t/p/w200${map['poster_path']}',
-      generos: List<int>.from(map['genres_ids']),
+      generos: List<int>.from(map['genre_ids'] ?? const []),
       favorito: map['favorite'] ?? false,
     );
   }

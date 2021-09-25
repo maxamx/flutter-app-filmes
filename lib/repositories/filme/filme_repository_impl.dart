@@ -17,16 +17,15 @@ class FilmeRepositoryImpl implements FilmeRepository {
       query: {
         'api_key': RemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
-        'page': 1
+        'page': '1'
       },
       decoder: (data) {
-        final resultado = data['results'];
-        if (resultado != null) {
-          return resultado
+        final resultadosData = data['results'];
+        if (resultadosData != null) {
+          return resultadosData
               .map<FilmeModel>((f) => FilmeModel.fromMap(f))
               .toList();
         }
-
         return <FilmeModel>[];
       },
     );
@@ -45,7 +44,7 @@ class FilmeRepositoryImpl implements FilmeRepository {
       query: {
         'api_key': RemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
-        'page': 1
+        'page': '1'
       },
       decoder: (data) {
         final resultado = data['results'];
