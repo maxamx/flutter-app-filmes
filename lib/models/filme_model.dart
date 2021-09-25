@@ -32,7 +32,8 @@ class FilmeModel {
       id: map['id'],
       titulo: map['title'],
       dataLancamento: map['release_date'],
-      caminhoImagemPoster: map['poster_path'],
+      caminhoImagemPoster:
+          'https://image.tmdb.org/t/p/w200${map['poster_path']}',
       generos: List<int>.from(map['genres_ids']),
       favorito: map['favorite'] ?? false,
     );

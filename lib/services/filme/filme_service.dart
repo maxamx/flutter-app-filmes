@@ -1,6 +1,6 @@
 import 'package:app_filmes/models/filme_model.dart';
 
-abstract class FilmeRepository {
+abstract class FilmeService {
   Future<List<FilmeModel>> getFilmesPopulares();
   Future<List<FilmeModel>> getFilmesTops();
 }

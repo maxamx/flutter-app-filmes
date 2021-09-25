@@ -1,4 +1,3 @@
-import 'package:app_filmes/applications/auth/auth_service.dart';
 import 'package:app_filmes/applications/ui/loader/loader_mixin.dart';
 import 'package:app_filmes/applications/ui/messages/messages_mixin.dart';
 import 'package:app_filmes/services/login/login_service.dart';

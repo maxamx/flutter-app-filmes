@@ -1,8 +1,12 @@
 import 'package:app_filmes/applications/ui/filmes_app_icons.dart';
+import 'package:app_filmes/models/filme_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class FilmesCard extends StatelessWidget {
-  const FilmesCard({Key? key}) : super(key: key);
+  final dateFormat = DateFormat('y');
+  final FilmeModel filmeModel;
+  FilmesCard({Key? key, required this.filmeModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +25,21 @@ class FilmesCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   clipBehavior: Clip.antiAlias,
-                  child: Image.network(
-                      'https://images-eu.ssl-images-amazon.com/images/I/51Qma1Xm19L._SY291_BO1,204,203,200_QL40_ML2_.jpg',
-                      width: 148,
-                      height: 184,
-                      fit: BoxFit.cover),
+                  child: Image.network(filmeModel.caminhoImagemPoster,
+                      width: 148, height: 184, fit: BoxFit.cover),
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
-                'Black Widow',
+                filmeModel.titulo,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
               Text(
-                '2021',
+                dateFormat.format(DateTime.parse(filmeModel.dataLancamento)),
                 style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w300,

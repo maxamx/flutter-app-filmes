@@ -1,9 +1,12 @@
 import 'package:app_filmes/applications/ui/filmes_card.dart';
+import 'package:app_filmes/models/filme_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FilmesGrupo extends StatelessWidget {
   final String _titulo;
-  const FilmesGrupo({Key? key, required String titulo})
+  final List<FilmeModel> filmes;
+  const FilmesGrupo({Key? key, required String titulo, required this.filmes})
       : _titulo = titulo,
         super(key: key);
 
@@ -20,15 +23,18 @@ class FilmesGrupo extends StatelessWidget {
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         SizedBox(
-          height: 280,
-          child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return FilmesCard();
-              }),
-        ),
+            height: 280,
+            child: Obx(() {
+              return ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: filmes.length,
+                  itemBuilder: (context, index) {
+                    return FilmesCard(
+                      filmeModel: filmes[index],
+                    );
+                  });
+            })),
       ],
     );
   }
