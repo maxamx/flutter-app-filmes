@@ -1,7 +1,8 @@
+import 'package:app_filmes/modules/filmes/filmes_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class FilmesHeader extends StatelessWidget {
+class FilmesHeader extends GetView<FilmesController> {
   const FilmesHeader({Key? key}) : super(key: key);
 
   @override
@@ -23,6 +24,7 @@ class FilmesHeader extends StatelessWidget {
             width: Get.width * .9,
             padding: EdgeInsets.only(bottom: 20),
             child: TextField(
+              onChanged: (value) => controller.filterByName(value),
               decoration: InputDecoration(
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(30)),

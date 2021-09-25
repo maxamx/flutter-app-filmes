@@ -11,11 +11,13 @@ class FilmesController extends GetxController with MessagesMixin {
   final _message = Rxn<MessageModel>();
   final _generos = <GeneroModelo>[].obs;
 
-  final _filmesPopulares = <FilmeModel>[].obs;
-  final _filmesTops = <FilmeModel>[].obs;
+  final filmesPopulares = <FilmeModel>[].obs;
+  final filmesTops = <FilmeModel>[].obs;
 
-  final _filmesPopularesOriginal = <FilmeModel>[];
-  final _filmesTopsOriginal = <FilmeModel>[];
+  var _filmesPopularesOriginal = <FilmeModel>[];
+  var _filmesTopsOriginal = <FilmeModel>[];
+
+  final generoSelecionado = Rxn<GeneroModelo>();
 
   FilmesController({
     required GeneroService generoService,
@@ -24,10 +26,6 @@ class FilmesController extends GetxController with MessagesMixin {
         _filmeService = filmeService;
 
   List<GeneroModelo> get generos => _generos.toList();
-
-  List<FilmeModel> get filmesPopulares => _filmesPopulares.toList();
-
-  List<FilmeModel> get filmesTops => _filmesTops.toList();
 
   @override
   void onInit() {
@@ -47,15 +45,61 @@ class FilmesController extends GetxController with MessagesMixin {
 
       final filmesTopsData = await _filmeService.getFilmesTops();
 
-      _filmesPopulares.assignAll(filmesPopularesData);
+      filmesPopulares.assignAll(filmesPopularesData);
+      _filmesPopularesOriginal = filmesPopularesData;
 
-      _filmesTops.assignAll(filmesTopsData);
+      filmesTops.assignAll(filmesTopsData);
+      _filmesTopsOriginal = filmesTopsData;
     } catch (e, s) {
       print(e);
       print(s);
       _message(MessageModel.error(
           title: 'Error',
           message: 'Error ao carregar dados de genero ou filmes'));
+    }
+  }
+
+  void filterByName(String titulo) {
+    if (titulo.isNotEmpty) {
+      var novaFilmesPopulares = _filmesPopularesOriginal.where((filme) {
+        return filme.titulo.toLowerCase().contains(titulo.toLowerCase());
+      });
+
+      var novaFilmesTops = _filmesTopsOriginal.where((filme) {
+        return filme.titulo.toLowerCase().contains(titulo.toLowerCase());
+      });
+
+      filmesPopulares.assignAll(novaFilmesPopulares);
+      filmesTops.assignAll(novaFilmesTops);
+    } else {
+      filmesPopulares.assignAll(_filmesPopularesOriginal);
+      filmesTops.assignAll(_filmesTopsOriginal);
+    }
+  }
+
+  void filtroFilmesPorGenero(GeneroModelo? generoModelo) {
+    var generoFiltro = generoModelo;
+
+    if (generoFiltro?.id == generoSelecionado.value?.id) {
+      generoFiltro = null;
+    }
+
+    generoSelecionado.value = generoFiltro;
+
+    if (generoFiltro != null) {
+      var novaFilmesPopulares = _filmesPopularesOriginal.where((filme) {
+        return filme.generos.contains(generoFiltro?.id);
+      });
+
+      var novaFilmesTops = _filmesTopsOriginal.where((filme) {
+        return filme.generos.contains(generoFiltro?.id);
+      });
+
+      filmesPopulares.assignAll(novaFilmesPopulares);
+      filmesTops.assignAll(novaFilmesTops);
+    } else {
+      filmesPopulares.assignAll(_filmesPopularesOriginal);
+      filmesTops.assignAll(_filmesTopsOriginal);
     }
   }
 }

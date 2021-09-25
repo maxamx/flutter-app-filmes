@@ -1,10 +1,9 @@
 import 'package:app_filmes/applications/ui/filmes_card.dart';
 import 'package:app_filmes/models/filme_model.dart';
-import 'package:app_filmes/modules/filmes/filmes_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
-class FilmesGrupo extends GetView<FilmesController> {
+class FilmesGrupo extends StatelessWidget {
   final String _titulo;
   final List<FilmeModel> filmes;
   const FilmesGrupo({Key? key, required String titulo, required this.filmes})
@@ -25,13 +24,17 @@ class FilmesGrupo extends GetView<FilmesController> {
         ),
         SizedBox(
           height: 280,
-          child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: filmes.length,
-            itemBuilder: (context, index) {
-              return FilmesCard(
-                filmeModel: filmes[index],
+          child: Obx(
+            () {
+              return ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: filmes.length,
+                itemBuilder: (context, index) {
+                  return FilmesCard(
+                    filmeModel: filmes[index],
+                  );
+                },
               );
             },
           ),

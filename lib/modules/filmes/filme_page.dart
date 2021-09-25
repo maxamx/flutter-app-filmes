@@ -13,23 +13,19 @@ class FilmePage extends GetView<FilmesController> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: Get.width,
-      child: Obx(
-        () {
-          return ListView(
-            children: [
-              FilmesHeader(),
-              FilmesFiltros(),
-              FilmesGrupo(
-                titulo: 'Mais Populares',
-                filmes: controller.filmesPopulares,
-              ),
-              FilmesGrupo(
-                titulo: 'Top Filmes',
-                filmes: controller.filmesTops,
-              ),
-            ],
-          );
-        },
+      child: ListView(
+        children: [
+          FilmesHeader(),
+          FilmesFiltros(),
+          FilmesGrupo(
+            titulo: 'Mais Populares',
+            filmes: controller.filmesPopulares,
+          ),
+          FilmesGrupo(
+            titulo: 'Top Filmes',
+            filmes: controller.filmesTops,
+          ),
+        ],
       ),
     );
   }
