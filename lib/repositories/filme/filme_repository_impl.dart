@@ -1,4 +1,5 @@
 import 'package:app_filmes/applications/rest_client/rest_client.dart';
+import 'package:app_filmes/models/filme_detalhe_modelo.dart';
 import 'package:app_filmes/models/filme_model.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
@@ -63,5 +64,27 @@ class FilmeRepositoryImpl implements FilmeRepository {
     }
 
     return resultado.body ?? <FilmeModel>[];
+  }
+
+  @override
+  Future<FilmeDetalheModelo?> getFilmeDetalhe(int id) async {
+    final resultado = await _restClient.get<FilmeDetalheModelo?>(
+      '/movie/$id',
+      query: {
+        'api_key': RemoteConfig.instance.getString('api_token'),
+        'language': 'pt-br',
+        'append_to_response': 'images,credits',
+        'include_image_language': 'en,pt-br'
+      },
+      decoder: (data) {
+        return FilmeDetalheModelo.fromMap(data);
+      },
+    );
+    if (resultado.hasError) {
+      print('Erro ao buscar detalhe do filme [${resultado.statusText}]');
+      throw Exception('Erro ao buscar detalhe do filme [$id]');
+    }
+
+    return resultado.body;
   }
 }

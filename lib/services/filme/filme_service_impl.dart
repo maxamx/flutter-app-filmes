@@ -1,3 +1,4 @@
+import 'package:app_filmes/models/filme_detalhe_modelo.dart';
 import 'package:app_filmes/models/filme_model.dart';
 import 'package:app_filmes/repositories/filme/filme_repository.dart';
 
@@ -14,4 +15,8 @@ class FilmeServiceImpl implements FilmeService {
       _filmeRepository.getFilmesPopulares();
   @override
   Future<List<FilmeModel>> getFilmesTops() => _filmeRepository.getFilmesTops();
+
+  @override
+  Future<FilmeDetalheModelo?> getFilmeDetalhe(int id) =>
+      _filmeRepository.getFilmeDetalhe(id);
 }
