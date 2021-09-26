@@ -1,6 +1,8 @@
 import 'package:app_filmes/applications/rest_client/rest_client.dart';
 import 'package:app_filmes/models/filme_detalhe_modelo.dart';
 import 'package:app_filmes/models/filme_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 import './filme_repository.dart';
@@ -86,5 +88,29 @@ class FilmeRepositoryImpl implements FilmeRepository {
     }
 
     return resultado.body;
+  }
+
+  @override
+  Future<void> adicionaOuRemoveFavorito(
+      String userId, FilmeModel filmeModel) async {
+    try {
+      var favoritoColecao = FirebaseFirestore.instance
+          .collection('favoritos')
+          .doc(userId)
+          .collection('filmes');
+
+      if (filmeModel.favorito) {
+        favoritoColecao.add(filmeModel.toMap());
+      } else {
+        var favoritoData = await favoritoColecao
+            .where('id', isEqualTo: filmeModel.id)
+            .limit(1)
+            .get();
+        favoritoData.docs.first.reference.delete();
+      }
+    } catch (e) {
+      print('Erro ao favoritar um filme');
+      rethrow;
+    }
   }
 }

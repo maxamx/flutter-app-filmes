@@ -6,8 +6,11 @@ import 'package:intl/intl.dart';
 
 class FilmesCard extends StatelessWidget {
   final dateFormat = DateFormat('y');
+  final VoidCallback favoritoCallBack;
   final FilmeModel filmeModel;
-  FilmesCard({Key? key, required this.filmeModel}) : super(key: key);
+  FilmesCard(
+      {Key? key, required this.filmeModel, required this.favoritoCallBack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +33,12 @@ class FilmesCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     clipBehavior: Clip.antiAlias,
-                    child: Image.network(filmeModel.caminhoImagemPoster,
-                        width: 148, height: 184, fit: BoxFit.cover),
+                    child: Image.network(
+                      'https://image.tmdb.org/t/p/w200${filmeModel.caminhoImagemPoster}',
+                      width: 148,
+                      height: 184,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -44,7 +51,9 @@ class FilmesCard extends StatelessWidget {
                   maxLines: 2,
                 ),
                 Text(
-                  dateFormat.format(DateTime.parse(filmeModel.dataLancamento)),
+                  dateFormat.format(
+                    DateTime.parse(filmeModel.dataLancamento),
+                  ),
                   style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w300,
@@ -63,7 +72,7 @@ class FilmesCard extends StatelessWidget {
                   height: 30,
                   child: IconButton(
                     iconSize: 13,
-                    onPressed: () {},
+                    onPressed: favoritoCallBack,
                     icon: Icon(FilmesAppIcons.heart_empty, color: Colors.grey),
                   ),
                 ),

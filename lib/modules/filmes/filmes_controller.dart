@@ -1,3 +1,4 @@
+import 'package:app_filmes/applications/auth/auth_service.dart';
 import 'package:app_filmes/applications/ui/messages/messages_mixin.dart';
 import 'package:app_filmes/models/filme_model.dart';
 import 'package:app_filmes/models/genero_modelo.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 class FilmesController extends GetxController with MessagesMixin {
   final FilmeService _filmeService;
   final GeneroService _generoService;
+  final AuthService _authService;
   final _message = Rxn<MessageModel>();
   final _generos = <GeneroModelo>[].obs;
 
@@ -22,8 +24,10 @@ class FilmesController extends GetxController with MessagesMixin {
   FilmesController({
     required GeneroService generoService,
     required FilmeService filmeService,
+    required AuthService authService,
   })  : _generoService = generoService,
-        _filmeService = filmeService;
+        _filmeService = filmeService,
+        _authService = authService;
 
   List<GeneroModelo> get generos => _generos.toList();
 
@@ -36,11 +40,12 @@ class FilmesController extends GetxController with MessagesMixin {
   @override
   Future<void> onReady() async {
     super.onReady();
+    await getGeneros();
+    await getFilmes();
+  }
+
+  Future<void> getFilmes() async {
     try {
-      final generosData = await _generoService.getGenero();
-
-      _generos.assignAll(generosData);
-
       final filmesPopularesData = await _filmeService.getFilmesPopulares();
 
       final filmesTopsData = await _filmeService.getFilmesTops();
@@ -54,8 +59,7 @@ class FilmesController extends GetxController with MessagesMixin {
       print(e);
       print(s);
       _message(MessageModel.error(
-          title: 'Error',
-          message: 'Error ao carregar dados de genero ou filmes'));
+          title: 'Error', message: 'Error ao carregar dados de filmes'));
     }
   }
 
@@ -100,6 +104,27 @@ class FilmesController extends GetxController with MessagesMixin {
     } else {
       filmesPopulares.assignAll(_filmesPopularesOriginal);
       filmesTops.assignAll(_filmesTopsOriginal);
+    }
+  }
+
+  Future<void> favoritoFilme(FilmeModel filmeModel) async {
+    final user = _authService.user;
+    if (user != null) {
+      var novoFilme = filmeModel.copyWith(favorito: !filmeModel.favorito);
+      await _filmeService.adicionaOuRemoveFavorito(user.uid, novoFilme);
+      await getFilmes();
+    }
+  }
+
+  Future<void> getGeneros() async {
+    try {
+      final generosData = await _generoService.getGenero();
+      _generos.assignAll(generosData);
+    } catch (e, s) {
+      print(e);
+      print(s);
+      _message(MessageModel.error(
+          title: 'Error', message: 'Error ao carregar dados de generos'));
     }
   }
 }
