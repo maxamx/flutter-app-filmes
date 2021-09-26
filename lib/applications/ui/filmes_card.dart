@@ -6,10 +6,11 @@ import 'package:intl/intl.dart';
 
 class FilmesCard extends StatelessWidget {
   final dateFormat = DateFormat('y');
-  final VoidCallback favoritoCallBack;
   final FilmeModel filmeModel;
+  final VoidCallback favoritoCallback;
+
   FilmesCard(
-      {Key? key, required this.filmeModel, required this.favoritoCallBack})
+      {Key? key, required this.filmeModel, required this.favoritoCallback})
       : super(key: key);
 
   @override
@@ -72,7 +73,7 @@ class FilmesCard extends StatelessWidget {
                   height: 30,
                   child: IconButton(
                     iconSize: 13,
-                    onPressed: favoritoCallBack,
+                    onPressed: favoritoCallback,
                     icon: Icon(FilmesAppIcons.heart_empty, color: Colors.grey),
                   ),
                 ),

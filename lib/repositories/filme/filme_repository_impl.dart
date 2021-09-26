@@ -94,21 +94,23 @@ class FilmeRepositoryImpl implements FilmeRepository {
   Future<void> adicionaOuRemoveFavorito(
       String userId, FilmeModel filmeModel) async {
     try {
-      var favoritoColecao = FirebaseFirestore.instance
+      var favoritoFilmeColecao = FirebaseFirestore.instance
           .collection('favoritos')
           .doc(userId)
           .collection('filmes');
 
       if (filmeModel.favorito) {
-        favoritoColecao.add(filmeModel.toMap());
+        favoritoFilmeColecao.add(filmeModel.toMap());
       } else {
-        var favoritoData = await favoritoColecao
+        var favoritoData = await favoritoFilmeColecao
             .where('id', isEqualTo: filmeModel.id)
             .limit(1)
             .get();
         favoritoData.docs.first.reference.delete();
       }
-    } catch (e) {
+    } catch (e, s) {
+      print(e);
+      print(s);
       print('Erro ao favoritar um filme');
       rethrow;
     }

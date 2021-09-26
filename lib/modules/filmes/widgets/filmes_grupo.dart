@@ -35,7 +35,7 @@ class FilmesGrupo extends GetView<FilmesController> {
                   var filme = filmes[index];
                   return FilmesCard(
                     filmeModel: filme,
-                    favoritoCallBack: () => controller.favoritoFilme(filme),
+                    favoritoCallback: () => controller.favoritoFilme(filme),
                   );
                 },
               );

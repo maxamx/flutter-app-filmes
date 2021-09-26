@@ -109,6 +109,7 @@ class FilmesController extends GetxController with MessagesMixin {
 
   Future<void> favoritoFilme(FilmeModel filmeModel) async {
     final user = _authService.user;
+    print('user $user');
     if (user != null) {
       var novoFilme = filmeModel.copyWith(favorito: !filmeModel.favorito);
       await _filmeService.adicionaOuRemoveFavorito(user.uid, novoFilme);
