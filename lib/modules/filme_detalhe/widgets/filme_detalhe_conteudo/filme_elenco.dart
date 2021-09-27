@@ -1,6 +1,7 @@
 import 'package:app_filmes/applications/ui/theme_extension.dart';
 import 'package:app_filmes/models/elenco_modelo.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class FilmeElenco extends StatelessWidget {
   final ElencoModelo? elencoModelo;
@@ -16,8 +17,13 @@ class FilmeElenco extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(elencoModelo?.imagem ?? '',
-                height: 85, width: 85, fit: BoxFit.cover),
+            child: FadeInImage.memoryNetwork(
+              image: elencoModelo?.imagem ?? '',
+              height: 85,
+              width: 85,
+              fit: BoxFit.cover,
+              placeholder: kTransparentImage,
+            ),
           ),
           Text(
             elencoModelo?.nome ?? '',

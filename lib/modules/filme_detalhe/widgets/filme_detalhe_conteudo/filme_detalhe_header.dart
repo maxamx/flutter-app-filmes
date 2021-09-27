@@ -1,5 +1,6 @@
 import 'package:app_filmes/models/filme_detalhe_modelo.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class FilmeDetalheHeader extends StatelessWidget {
   final FilmeDetalheModelo? filmeDetalhe;
@@ -20,7 +21,10 @@ class FilmeDetalheHeader extends StatelessWidget {
             final imagem = filmeDetalheData.urlImagens[index];
             return Padding(
               padding: EdgeInsets.all(2),
-              child: Image.network(imagem),
+              child: FadeInImage.memoryNetwork(
+                image: imagem,
+                placeholder: kTransparentImage,
+              ),
             );
           },
         ),
