@@ -1,5 +1,6 @@
 import 'package:app_filmes/applications/ui/filmes_app_icons.dart';
 import 'package:app_filmes/applications/ui/theme_extension.dart';
+import 'package:app_filmes/modules/favoritos/favorito_bindings.dart';
 import 'package:app_filmes/modules/favoritos/favorito_page.dart';
 import 'package:app_filmes/modules/filmes/filme_page.dart';
 import 'package:app_filmes/modules/filmes/filmes_bindings.dart';
@@ -20,11 +21,18 @@ class HomePage extends GetView<HomeController> {
           onTap: controller.gotToPage,
           currentIndex: controller.pageIndex,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Filmes'),
             BottomNavigationBarItem(
-                icon: Icon(FilmesAppIcons.heart_empty), label: 'Favoritos'),
+              icon: Icon(Icons.movie),
+              label: 'Filmes',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.logout_outlined), label: 'Sair'),
+              icon: Icon(FilmesAppIcons.heart_empty),
+              label: 'Favoritos',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.logout_outlined),
+              label: 'Sair',
+            ),
           ],
         );
       }),
@@ -34,15 +42,19 @@ class HomePage extends GetView<HomeController> {
         onGenerateRoute: (settings) {
           if (settings.name == '/filmes') {
             return GetPageRoute(
-                settings: settings,
-                page: () => FilmePage(),
-                binding: FilmesBindings());
+              settings: settings,
+              page: () => FilmePage(),
+              binding: FilmesBindings(),
+            );
           }
 
           if (settings.name == '/favoritos') {
-            return GetPageRoute(settings: settings, page: () => FavoritoPage());
+            return GetPageRoute(
+              settings: settings,
+              page: () => FavoritoPage(),
+              binding: FavoritoBindings(),
+            );
           }
-
           return null;
         },
       ),
