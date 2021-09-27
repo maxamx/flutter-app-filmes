@@ -46,9 +46,25 @@ class FilmesController extends GetxController with MessagesMixin {
 
   Future<void> getFilmes() async {
     try {
-      final filmesPopularesData = await _filmeService.getFilmesPopulares();
+      var filmesPopularesData = await _filmeService.getFilmesPopulares();
+      var filmesTopsData = await _filmeService.getFilmesTops();
+      final favoritos = await getFavoritos();
 
-      final filmesTopsData = await _filmeService.getFilmesTops();
+      filmesPopularesData = filmesPopularesData.map((f) {
+        if (favoritos.containsKey(f.id)) {
+          return f.copyWith(favorito: true);
+        } else {
+          return f.copyWith(favorito: false);
+        }
+      }).toList();
+
+      filmesTopsData = filmesTopsData.map((f) {
+        if (favoritos.containsKey(f.id)) {
+          return f.copyWith(favorito: true);
+        } else {
+          return f.copyWith(favorito: false);
+        }
+      }).toList();
 
       filmesPopulares.assignAll(filmesPopularesData);
       _filmesPopularesOriginal = filmesPopularesData;
@@ -127,5 +143,16 @@ class FilmesController extends GetxController with MessagesMixin {
       _message(MessageModel.error(
           title: 'Error', message: 'Error ao carregar dados de generos'));
     }
+  }
+
+  Future<Map<int, FilmeModel>> getFavoritos() async {
+    var user = _authService.user;
+    if (user != null) {
+      final favoritos = await _filmeService.getFilmesFavoritos(user.uid);
+      return <int, FilmeModel>{
+        for (var fav in favoritos) fav.id: fav,
+      };
+    }
+    return {};
   }
 }

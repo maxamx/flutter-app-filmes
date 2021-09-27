@@ -22,4 +22,8 @@ class FilmeServiceImpl implements FilmeService {
   @override
   Future<void> adicionaOuRemoveFavorito(String userId, FilmeModel filmeModel) =>
       _filmeRepository.adicionaOuRemoveFavorito(userId, filmeModel);
+
+  @override
+  Future<List<FilmeModel>> getFilmesFavoritos(String userId) =>
+      _filmeRepository.getFilmesFavoritos(userId);
 }

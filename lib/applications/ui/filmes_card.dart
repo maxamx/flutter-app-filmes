@@ -1,4 +1,5 @@
 import 'package:app_filmes/applications/ui/filmes_app_icons.dart';
+import 'package:app_filmes/applications/ui/theme_extension.dart';
 import 'package:app_filmes/models/filme_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,7 +48,10 @@ class FilmesCard extends StatelessWidget {
                 ),
                 Text(
                   filmeModel.titulo,
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
@@ -56,9 +60,10 @@ class FilmesCard extends StatelessWidget {
                     DateTime.parse(filmeModel.dataLancamento),
                   ),
                   style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.grey),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),
@@ -74,7 +79,13 @@ class FilmesCard extends StatelessWidget {
                   child: IconButton(
                     iconSize: 13,
                     onPressed: favoritoCallback,
-                    icon: Icon(FilmesAppIcons.heart_empty, color: Colors.grey),
+                    icon: Icon(
+                      filmeModel.favorito
+                          ? FilmesAppIcons.heart
+                          : FilmesAppIcons.heart_empty,
+                      color:
+                          filmeModel.favorito ? context.themeRed : Colors.grey,
+                    ),
                   ),
                 ),
               ),
